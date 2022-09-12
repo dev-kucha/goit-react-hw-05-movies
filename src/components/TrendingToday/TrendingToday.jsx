@@ -1,16 +1,37 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+import { getTrendingToday } from '../../APIs/themoviedbApi';
 
 export default function TrendingToday() {
   const [trandsMovies, setTrandsMovies] = useState([]);
+  console.log(`trandsMovies: ${trandsMovies}`);
+
   useEffect(() => {
-    console.log('TrandsMovies');
-    setTrandsMovies(['a', 'b', 'c', 'd']);
+    async function fetchTrending() {
+      const data = await getTrendingToday();
+      setTrandsMovies(data);
+      //   console.log(data);
+    }
+
+    fetchTrending();
+    //   .then(movies => setTrandsMovies(() => movies));
+    //   .then(res => {
+
+    // return res;
+    // });
+    //   .then(res => console.log(typeof res));
   }, []);
 
   return (
-    <ul>
-      <li>Trend 1</li>
-      <li>{trandsMovies}</li>
-    </ul>
+    trandsMovies.length > 0 && (
+      <ul>
+        {trandsMovies.map(trandsMovie => (
+          <li key={trandsMovie.id}>
+            <Link to={`movies/${trandsMovie.id}`}>{trandsMovie.title}</Link>
+          </li>
+        ))}
+      </ul>
+    )
   );
 }
