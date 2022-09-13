@@ -5,7 +5,7 @@ import { getTrendingToday } from '../../APIs/themoviedbApi';
 
 export default function TrendingToday() {
   const [trandsMovies, setTrandsMovies] = useState([]);
-  console.log(`trandsMovies: ${trandsMovies}`);
+  // console.log(`trandsMovies: ${trandsMovies}`);
 
   useEffect(() => {
     async function fetchTrending() {

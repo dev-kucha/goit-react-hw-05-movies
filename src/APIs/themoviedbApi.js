@@ -11,10 +11,34 @@ export async function getTrendingToday() {
     const response = await axios.get(
       `/trending/${MEDIA_TYPE}/${TIME_WINDOW}?api_key=${API_KEY}`
     );
-    // console.log(response);
-    // console.log(JSON.parse(response));
     return response.data.results;
-    // return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getMovie(id) {
+  try {
+    const response = await axios.get(`/movie/${id}?api_key=${API_KEY}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getCredits(id) {
+  try {
+    const response = await axios.get(`/movie/${id}/credits?api_key=${API_KEY}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getReviews(id) {
+  try {
+    const response = await axios.get(`/movie/${id}/reviews?api_key=${API_KEY}`);
+    return response;
   } catch (error) {
     console.error(error);
   }

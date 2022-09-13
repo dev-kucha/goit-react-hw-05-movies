@@ -1,13 +1,66 @@
+import { useState, useEffect } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
+
+import { getMovie } from 'APIs/themoviedbApi';
 
 import { NavLinkStyled } from './MovieDetails.styled';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
-  console.log(movieId);
+  // console.log(movieId);
+  const [movie, setMovie] = useState(null);
+
+  const getGenresList = genresArr => {
+    return genresArr.map(genre => genre.name).join(', ');
+  };
+
+  useEffect(() => {
+    // console.log(movieId);
+    // console.log(Number(movieId));
+    async function fetchMovie() {
+      const resMovie = await getMovie(movieId);
+      // console.log(resMovie.data);
+      // console.log(resMovie.data.original_title);
+      // console.log(resMovie.data.poster_path);
+      setMovie(resMovie.data);
+    }
+
+    fetchMovie();
+  }, [movieId]);
+
+  if (!movie) {
+    return;
+  }
+
   return (
     <>
-      <div>MovieDetails</div>
+      <p style={{ fontSize: 0.6 + 'em' }}>id: {movieId}</p>
+      {movie.poster_path && (
+        <img
+          src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+          alt={`${movie.original_title} poster`}
+        />
+      )}
+
+      <h1>
+        {movie.original_title} ({new Date(movie.release_date).getFullYear()})
+      </h1>
+      {movie.overview && (
+        <div>
+          <h2>Overview</h2>
+          <p>{movie.overview}</p>
+        </div>
+      )}
+
+      {movie.genres && (
+        <div>
+          <h2>Genres</h2>
+          {/* <p>{console.log(movie.genres)}</p>; */}
+          <p>{getGenresList(movie.genres)}</p>
+        </div>
+      )}
+
+      <h4>Addition Information</h4>
       <ul>
         <li>
           <NavLinkStyled to="cast">Cast</NavLinkStyled>
@@ -16,7 +69,7 @@ export default function MovieDetails() {
           <NavLinkStyled to="reviews">Reviews</NavLinkStyled>
         </li>
       </ul>
-      <p>{movieId}</p>
+
       <Outlet />
     </>
   );
