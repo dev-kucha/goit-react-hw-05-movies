@@ -17,7 +17,7 @@ export default function Cast() {
       // console.log(resMovie.data);
       // console.log(resMovie.data.original_title);
       // console.log(resMovie.data.poster_path);
-      setCredits(resCredits.data);
+      setCredits(resCredits.data.cast);
     }
 
     fetchCredits();
@@ -26,7 +26,28 @@ export default function Cast() {
   return (
     <>
       <h4>Cast</h4>
-      <p>{console.log(credits)}</p>
+      {credits && (
+        <ul>
+          {credits.map(credit => (
+            <li key={credit.id}>
+              {credit.profile_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${credit.profile_path}`}
+                  alt={credit.name}
+                />
+              )}
+              <p>
+                <strong>{credit.name}</strong>{' '}
+                {credit.character && <em>({credit.character})</em>}
+                <br />
+                <br />
+                <br />
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* {credits.cast} */}
     </>
   );
 }

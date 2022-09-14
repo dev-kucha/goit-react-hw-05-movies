@@ -17,7 +17,7 @@ export default function Reviews() {
       // console.log(resMovie.data);
       // console.log(resMovie.data.original_title);
       // console.log(resMovie.data.poster_path);
-      setReviews(resReviews.data);
+      setReviews(resReviews.data.results);
     }
 
     fetchReviews();
@@ -25,8 +25,22 @@ export default function Reviews() {
 
   return (
     <>
-      <h4>Reviews</h4>
-      <p>{console.log(reviews)}</p>
+      {reviews?.length > 0 ? (
+        <ul>
+          {reviews.map(review => (
+            <li key={review.id}>
+              <p>
+                <strong>{review.author}</strong>
+              </p>
+              <p>{review.content}</p>
+              <br />
+              <br />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>We do not have any reviews for this movie.</p>
+      )}
     </>
   );
 }
