@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 
 import { getMovie } from 'APIs/themoviedbApi';
@@ -69,8 +69,9 @@ export default function MovieDetails() {
           <NavLinkStyled to="reviews">Reviews</NavLinkStyled>
         </li>
       </ul>
-
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

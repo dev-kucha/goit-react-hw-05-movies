@@ -43,3 +43,14 @@ export async function getReviews(id) {
     console.error(error);
   }
 }
+
+export async function getMovies(query) {
+  try {
+    const response = await axios.get(
+      `/search/movie/?query=${query}&api_key=${API_KEY}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
