@@ -1,42 +1,54 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { getMovies } from 'APIs/themoviedbApi';
+import SearchedMovies from '../../components/SearchedMovies/SearchedMovies';
 
 export default function Movies() {
   const [searchText, setSearchText] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
   const [findedMovies, setFindedMovies] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const name = searchParams.get('name');
 
-  function onSubmit(e) {
-    e.preventDefault();
-    setSearchQuery(searchText);
-  }
+  // function onSubmit(e) {
+  //   e.preventDefault();
+  //   setSearchQuery(searchText);
+  // }
 
   useEffect(() => {
-    if (!searchQuery) {
+    if (!name) {
       return;
     }
     async function fetchMovies() {
-      console.log(searchQuery);
-      const data = await getMovies(searchQuery);
-      setFindedMovies(data);
-      console.log(data);
+      // console.log(searchQuery);
+      const response = await getMovies(name);
+      setFindedMovies(response.data.results);
+      // console.log(data);
     }
 
     fetchMovies();
-  }, [searchQuery]);
+  }, [name]);
+
+  const updateQueryString = e => {
+    e.preventDefault();
+    const nextSearch = searchText !== '' ? { name: searchText } : {};
+    setSearchParams(nextSearch);
+  };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        value={searchText}
-        onChange={e => setSearchText(e.target.value)}
-      />
-      <button type="submit" value="">
-        Search
-      </button>
-      {console.log(findedMovies)}
-    </form>
+    <>
+      <form onSubmit={updateQueryString}>
+        <input
+          type="text"
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+        />
+        <button type="submit" value="">
+          Search
+        </button>
+      </form>
+      {findedMovies && <SearchedMovies movies={findedMovies} />}
+    </>
   );
 }
