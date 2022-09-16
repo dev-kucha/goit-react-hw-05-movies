@@ -28,7 +28,9 @@ export default function TrendingToday() {
       <ul>
         {trandsMovies.map(trandsMovie => (
           <li key={trandsMovie.id}>
-            <Link to={`movies/${trandsMovie.id}`}>{trandsMovie.title}</Link>
+            <Link to={`movies/${trandsMovie.id}`} state={{ pathname: '/home' }}>
+              {trandsMovie.title}
+            </Link>
           </li>
         ))}
       </ul>

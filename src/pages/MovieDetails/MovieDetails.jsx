@@ -1,11 +1,12 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 
 import { getMovie } from 'APIs/themoviedbApi';
+import GoBack from '../../components/GoBack/GoBack';
 
 import { NavLinkStyled } from './MovieDetails.styled';
 
-export default function MovieDetails() {
+export default function MovieDetails({ from }) {
   const { movieId } = useParams();
   // console.log(movieId);
   const [movie, setMovie] = useState(null);
@@ -13,6 +14,9 @@ export default function MovieDetails() {
   const getGenresList = genresArr => {
     return genresArr.map(genre => genre.name).join(', ');
   };
+
+  const location = useLocation();
+  console.log(location.state);
 
   useEffect(() => {
     // console.log(movieId);
@@ -34,6 +38,7 @@ export default function MovieDetails() {
 
   return (
     <>
+      <GoBack from={location.state} />
       <p style={{ fontSize: 0.6 + 'em' }}>id: {movieId}</p>
       {movie.poster_path && (
         <img
