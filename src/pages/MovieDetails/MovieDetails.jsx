@@ -2,7 +2,8 @@ import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 
 import { getMovie } from 'APIs/themoviedbApi';
-import GoBack from '../../components/GoBack/GoBack';
+// import GoBack from '../../components/GoBack/GoBack';
+import BackLink from '../../components/BackLink/BackLink';
 
 import { NavLinkStyled } from './MovieDetails.styled';
 
@@ -35,7 +36,8 @@ export default function MovieDetails({ from }) {
 
   return (
     <>
-      <GoBack from={location.state} />
+      {/* <GoBack from={location.state} /> */}
+      <BackLink to={location.state}>Back</BackLink>
       <p style={{ fontSize: 0.6 + 'em' }}>id: {id}</p>
       {poster_path && (
         <img
