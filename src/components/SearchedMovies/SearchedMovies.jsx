@@ -9,7 +9,7 @@ export default function SearchedMovies({ movies }) {
       {movies.map(movie => (
         <li key={movie.id}>
           <Link to={`${movie.id}`} state={location}>
-            {movie.title}
+            {movie.title} ({movie.release_date.slice(0, 4)})
           </Link>
         </li>
       ))}

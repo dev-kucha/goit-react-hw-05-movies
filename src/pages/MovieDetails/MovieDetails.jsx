@@ -27,34 +27,37 @@ export default function MovieDetails({ from }) {
   }, [movieId]);
 
   if (!movie) {
-    return;
+    return null;
   }
+
+  const { id, poster_path, original_title, release_date, overview, genres } =
+    movie;
 
   return (
     <>
       <GoBack from={location.state} />
-      <p style={{ fontSize: 0.6 + 'em' }}>id: {movieId}</p>
-      {movie.poster_path && (
+      <p style={{ fontSize: 0.6 + 'em' }}>id: {id}</p>
+      {poster_path && (
         <img
-          src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-          alt={`${movie.original_title} poster`}
+          src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+          alt={`${original_title} poster`}
         />
       )}
 
       <h1>
-        {movie.original_title} ({new Date(movie.release_date).getFullYear()})
+        {original_title} ({new Date(release_date).getFullYear()})
       </h1>
-      {movie.overview && (
+      {overview && (
         <div>
           <h2>Overview</h2>
-          <p>{movie.overview}</p>
+          <p>{overview}</p>
         </div>
       )}
 
-      {movie.genres && (
+      {genres && (
         <div>
           <h2>Genres</h2>
-          <p>{getGenresList(movie.genres)}</p>
+          <p>{getGenresList(genres)}</p>
         </div>
       )}
 

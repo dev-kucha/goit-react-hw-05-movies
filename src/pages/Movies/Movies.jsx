@@ -10,7 +10,6 @@ export default function Movies() {
   const [findedMovies, setFindedMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const name = searchParams.get('name');
-  
 
   // function onSubmit(e) {
   //   e.preventDefault();
@@ -49,7 +48,9 @@ export default function Movies() {
           Search
         </button>
       </form>
-      {findedMovies?.length ? (
+      {!name ? (
+        <p>Enter your search query.</p>
+      ) : findedMovies?.length ? (
         <SearchedMovies movies={findedMovies} goBackParams={searchParams} />
       ) : (
         <p>We do not have any movie for this query.</p>

@@ -8,22 +8,12 @@ import { lazy } from 'react';
 // import Cast from '../pages/Cast/Cast';
 // import Reviews from '../pages/Reviews/Reviews';
 
-// const createAsyncComponent = path => lazy(() => import(path));
-
 const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
 const Home = lazy(() => import('../pages/Home/Home'));
 const Movies = lazy(() => import('../pages/Movies/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
-const Cast = lazy(() => import('../pages/Cast/Cast'));
-const Reviews = lazy(() => import('../pages/Reviews/Reviews'));
-
-// const Home = createAsyncComponent('');
-// const Movies = createAsyncComponent('../pages/Movies/Movies');
-// const MovieDetails = createAsyncComponent('../pages/MovieDetails/MovieDetails');
-// const Cast = createAsyncComponent('../pages/Cast/Cast');
-// const Reviews = createAsyncComponent('../pages/Reviews/Reviews');
-
-// import { NavLinkStyled } from './App.styled';
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
   return (
