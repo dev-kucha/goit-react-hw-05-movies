@@ -9,7 +9,6 @@ import { NavLinkStyled } from './MovieDetails.styled';
 
 export default function MovieDetails({ from }) {
   const { movieId } = useParams();
-  // console.log(movieId);
   const [movie, setMovie] = useState(null);
 
   const getGenresList = genresArr => {
@@ -17,6 +16,7 @@ export default function MovieDetails({ from }) {
   };
 
   const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies'; ///???
 
   useEffect(() => {
     async function fetchMovie() {
@@ -37,7 +37,7 @@ export default function MovieDetails({ from }) {
   return (
     <>
       {/* <GoBack from={location.state} /> */}
-      <BackLink to={location.state}>Back</BackLink>
+      <BackLink to={backLinkHref}>Back</BackLink>
       <p style={{ fontSize: 0.6 + 'em' }}>id: {id}</p>
       {poster_path && (
         <img
@@ -66,12 +66,14 @@ export default function MovieDetails({ from }) {
       <h4>Addition Information</h4>
       <ul>
         <li>
-          <NavLinkStyled to="cast" state={location}>
+          <NavLinkStyled to="cast" state={{ from: backLinkHref }}>
             Cast
           </NavLinkStyled>
         </li>
         <li>
-          <NavLinkStyled to="reviews">Reviews</NavLinkStyled>
+          <NavLinkStyled to="reviews" state={{ from: backLinkHref }}>
+            Reviews
+          </NavLinkStyled>
         </li>
       </ul>
       <Suspense fallback={<div>Loading...</div>}>
