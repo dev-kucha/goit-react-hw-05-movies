@@ -16,16 +16,10 @@ export default function MovieDetails({ from }) {
   };
 
   const location = useLocation();
-  console.log(location.state);
 
   useEffect(() => {
-    // console.log(movieId);
-    // console.log(Number(movieId));
     async function fetchMovie() {
       const resMovie = await getMovie(movieId);
-      // console.log(resMovie.data);
-      // console.log(resMovie.data.original_title);
-      // console.log(resMovie.data.poster_path);
       setMovie(resMovie.data);
     }
 
@@ -60,7 +54,6 @@ export default function MovieDetails({ from }) {
       {movie.genres && (
         <div>
           <h2>Genres</h2>
-          {/* <p>{console.log(movie.genres)}</p>; */}
           <p>{getGenresList(movie.genres)}</p>
         </div>
       )}
@@ -68,7 +61,9 @@ export default function MovieDetails({ from }) {
       <h4>Addition Information</h4>
       <ul>
         <li>
-          <NavLinkStyled to="cast">Cast</NavLinkStyled>
+          <NavLinkStyled to="cast" state={location}>
+            Cast
+          </NavLinkStyled>
         </li>
         <li>
           <NavLinkStyled to="reviews">Reviews</NavLinkStyled>

@@ -1,14 +1,14 @@
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-export const NavLinkStyled = styled(NavLink)`
-  color: black;
+// export const NavLinkStyled = styled(NavLink)`
+//   color: black;
 
-  &.active {
-    color: orange;
-  }
-`;
+//   &.active {
+//     color: orange;
+//   }
+// `;
 
 export const Container = styled.div`
   max-width: 960px;

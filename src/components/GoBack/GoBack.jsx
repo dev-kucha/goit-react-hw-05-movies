@@ -6,7 +6,7 @@ export default function GoBack({ from }) {
   //   console.log(from);
 
   const handleClick = () => {
-    console.log('cklickded');
+    // console.log('cklickded');
     navigate(from, { replace: true });
   };
 

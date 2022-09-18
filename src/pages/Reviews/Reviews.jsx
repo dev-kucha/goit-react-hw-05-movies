@@ -5,18 +5,11 @@ import { getReviews } from 'APIs/themoviedbApi';
 
 export default function Reviews() {
   const { movieId } = useParams();
-  //   console.log(movieId);
-
   const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
-    // console.log(movieId);
-    // console.log(Number(movieId));
     async function fetchReviews() {
       const resReviews = await getReviews(movieId);
-      // console.log(resMovie.data);
-      // console.log(resMovie.data.original_title);
-      // console.log(resMovie.data.poster_path);
       setReviews(resReviews.data.results);
     }
 
