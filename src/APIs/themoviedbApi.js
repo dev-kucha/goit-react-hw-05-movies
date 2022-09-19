@@ -48,7 +48,7 @@ export async function getMovies(query) {
   try {
     const response = await axios.get(
       // `/search/movie/?query=${query}&api_key=${API_KEY}`
-      `/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1`
+      `/search/movie/?api_key=${API_KEY}&language=en-US&query=${query}&page=1`
     );
     return response;
   } catch (error) {
