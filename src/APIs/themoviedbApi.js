@@ -5,6 +5,7 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const MEDIA_TYPE = 'movie';
 const TIME_WINDOW = 'day';
 const API_KEY = '70cddabccebaf467901819a0b3b6e799';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 export async function getTrendingToday() {
   try {
@@ -47,7 +48,7 @@ export async function getReviews(id) {
 export async function getMovies(query) {
   try {
     const response = await axios.get(
-      `/search/movie/?query=${query}&api_key=${API_KEY}`
+      `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}`
     );
     return response;
   } catch (error) {
